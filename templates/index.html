@@ -1,0 +1,196 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>Recipe Recommendation</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5 text-center">Recipe Recommendation System</h1>
+        <div class="form-container">
+            <form method="post" class="mt-4">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="calories">Calories</label>
+                        <input type="number" class="form-control" id="calories" name="calories" step="any" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="fat">Fat</label>
+                        <input type="number" class="form-control" id="fat" name="fat" step="any" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Carbohydrates">Carbohydrates</label>
+                        <input type="number" class="form-control" id="Carbohydrates" name="Carbohydrates" step="any" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="protein">Protein</label>
+                        <input type="number" class="form-control" id="protein" name="protein" step="any" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="cholesterol">Cholesterol</label>
+                        <input type="number" class="form-control" id="cholestrol" name="cholesterol" step="any" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="sodium">Sodium</label>
+                        <input type="number" class="form-control" id="sodium" name="sodium" step="any" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fiber">Fiber</label>
+                    <input type="number" class="form-control" id="fiber" name="fiber" step="any" required>
+                </div>
+                <div class="form-group">
+                    <label for="ingredients">Ingredients</label>
+                    <input type="text" class="form-control" id="ingredients" name="ingredients" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Get Recommendations</button>
+            </form>
+        </div>
+
+        <div class="mt-5">
+            <h2>Recommended Recipes</h2>
+            <div class="row">
+                {% if recommendations %}
+                    {% for recipe in recommendations %}
+                        <div class="col-md-4">
+                            <div class="recipe-card">
+                                <img class="card-img-top recipe-image" src="{{ recipe['image_url'] }}" alt="{{ recipe['image_url'] }}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ recipe['recipe_name'] }}</h5>
+                                    <p class="card-text">{{ recipe['ingredients_list'] }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No recommendations available</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Recipe Recommendation System</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .recipe-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+        .recipe-card:hover {
+            transform: scale(1.05);
+        }
+        .recipe-image {
+            height: 200px;
+            object-fit: cover;
+        }
+        .form-container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-control {
+            transition: border-color 0.2s;
+        }
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Recipe Recommendation System</h1>
+        <div class="form-container mt-4">
+            <form method="post">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="calories">Calories</label>
+                        <input type="number" class="form-control" id="calories" name="calories" step="any" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="fat">Fat</label>
+                        <input type="number" class="form-control" id="fat" name="fat" step="any" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Carbohydrates">Carbohydrates</label>
+                        <input type="number" class="form-control" id="Carbohydrates" name="Carbohydrates" step="any" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="protein">Protein</label>
+                        <input type="number" class="form-control" id="protein" name="protein" step="any" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="cholesterol">Cholesterol</label>
+                        <input type="number" class="form-control" id="cholesterol" name="cholesterol" step="any" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="sodium">Sodium</label>
+                        <input type="number" class="form-control" id="sodium" name="sodium" step="any" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fiber">Fiber</label>
+                    <input type="number" class="form-control" id="fiber" name="fiber" step="any" required>
+                </div>
+                <div class="form-group">
+                    <label for="ingredients">Ingredients</label>
+                    <input type="text" class="form-control" id="ingredients" name="ingredients" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Get Recommendations</button>
+            </form>
+        </div>
+
+        <div class="mt-5">
+            <h2>Recommended Recipes</h2>
+            <div class="row">
+                {% if recommendations %}
+                    {% for recipe in recommendations %}
+                        <div class="col-md-4">
+                            <div class="recipe-card">
+                                <img class="card-img-top recipe-image" src="{{ recipe['image_url'] }}" alt="{{ recipe['recipe_name'] }}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ recipe['recipe_name'] }}</h5>
+                                    <p class="card-text">{{ recipe['ingredients_list'] }}</p>
+                                    <a href="#" class="btn btn-outline-primary">View Recipe</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-12">
+                        <p class="text-center">No recommendations available</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
